@@ -1,10 +1,5 @@
 # Principal Components Analysis (PCA) Implementations
 
-Sources :
-* https://en.wikipedia.org/wiki/Principal_component_analysis
-* https://www.quora.com/What-is-an-intuitive-explanation-for-PCA
-* docs/tutorial_pca.pdf : *A tutorial on Principal Components Analysis* by Lindsay I Smith
-
 
 ## Introduction
 
@@ -21,7 +16,10 @@ It is also a valuable exercice to practice python programming.
 
 ## Source
 
-The implementation
+Sources :
+* https://en.wikipedia.org/wiki/Principal_component_analysis
+* https://www.quora.com/What-is-an-intuitive-explanation-for-PCA
+* docs/tutorial_pca.pdf : *A tutorial on Principal Components Analysis* by Lindsay I Smith
 
 ## Use
 
