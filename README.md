@@ -3,10 +3,11 @@
 
 ## Introduction
 
-This module presents an implementation of PCA in almost pure python (scipy was required to compute the eigenvectors and eigenvalues).
+This module presents an implementation of PCA in pure python^*.
 
 PCA is dimension reduction technique. It examines correlations between variales and finds the underlying variables (known as principal components) that best differenciate the data points. Principal components are dimensions along which your data points are most spread out.
 
+* only scipy is used to compute the eigenvectors and eigenvalues.
 
 ## Motivation
 
