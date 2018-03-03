@@ -2,7 +2,6 @@
 """
 from scipy.linalg import eig
 
-## Using covariance
 
 # Step 1:  Substract the mean
 
@@ -101,7 +100,6 @@ def filter(eig_values, eig_vectors):
     filt_eig_tuples = [(eig_val, eig_vec) for eig_val, eig_vec in eig_tuples if eig_val >= 1]
     # Sort the tuples based on first value
     sort_eig_tuples = sorted(filt_eig_tuples, reverse=True, key=lambda x: x[0])
-    # print("sort_eig_tuples : {}".format(sort_eig_tuples))
     # Uncombine
     filt_eig_values, filt_eig_vectors = zip(*sort_eig_tuples)
     return list(filt_eig_values), list(filt_eig_vectors)
@@ -156,7 +154,13 @@ def multiply(matrix, eig_vectors):
 #     [1.22382056, -0.162675287]
 # ]
 
+def print_matrix(matrix):
+    for row in matrix:
+        print(row)
+
 if __name__ == '__main__':
+
+    display = False
 
     # Initial matrix
     matrix = [
@@ -174,27 +178,40 @@ if __name__ == '__main__':
     # cols = ["x", "y"]
     # index = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
+    # Step 1:  Substract the mean.
     new_matrix = substract_mean(matrix)
-    print("\n* Substract mean :")
-    for row in new_matrix:
-        print(row)
+
+    # Step 2: Calculate the covariance matrix.
     cov_matrix = covariance_matrix(new_matrix)
-    print("\n* Covariance matrix :")
-    for row in cov_matrix:
-        print(row)
+
+    # Step 3: Compute the eigenvectors and eigenvalues of the covariance matrix.
     eig_values, eig_vectors = scipy_eig(cov_matrix)
-    print("\n* Eigenvalues before filtering :")
-    print(eig_values)
-    print("\n* Eigenvectors before filtering :")
-    for row in eig_vectors:
-        print(row)
+
+    # Step 4: Choose components and form a feature vector.
     eig_values, eig_vectors = filter(eig_values, eig_vectors)
-    print("\n* Eigenvalues after filtering :")
-    print(eig_values)
-    print("\n* Eigenvectors after filtering :")
-    for row in eig_vectors:
-        print(row)
+
+    # Step 5: Deriving the new dataset
     final_matrix = multiply(new_matrix, eig_vectors)
-    print("\n* After PCA :")
-    for row in final_matrix:
-        print(row)
+
+    if display:
+        print("\n* Substract mean :")
+        print_matrix(new_matrix)
+
+        print("\n* Covariance matrix :")
+        print_matrix(cov_matri)
+
+        print("\n* Eigenvalues before filtering :")
+        print(eig_values)
+
+        print("\n* Eigenvectors before filtering :")
+        print_matrix(eig_vectors)
+
+        print("\n* Eigenvalues after filtering :")
+        print(eig_values)
+
+        print("\n* Eigenvectors after filtering :")
+        print_matrix(eig_vectors)
+
+        print("\n* After PCA :")
+        print_matrix(final_matrix)
+
