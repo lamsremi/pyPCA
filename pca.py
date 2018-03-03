@@ -8,13 +8,7 @@ from scipy.linalg import eig
 def substract_mean(matrix):
     """Substract the mean from each of the data dimensions.
     Args:
-        matrix (list): matrix of data.
-        [
-            [   5,   1, -1, -0.5],
-            [   5, 1.5, -2, -0.5],
-            [-0.5,  -1,  2,    5],
-            [-0.5,  -2,  2,    5]
-        ]
+        matrix (array like): matrix of data.
     """
     # Dimension
     dimension, size = len(matrix[0]), len(matrix)
@@ -44,21 +38,9 @@ def covariance(vect_X, vect_Y):
 def covariance_matrix(matrix):
     """ Compute the covariance matrix.
     Args:
-        matrix (list): matrix of data.
-        [
-            [   5,   1, -1, -0.5],
-            [   5, 1.5, -2, -0.5],
-            [-0.5,  -1,  2,    5],
-            [-0.5,  -2,  2,    5]
-        ]
+        matrix (array like): matrix of data.
     Return:
-        cov_matrix (list): covariance matrix.
-        [
-            [ 10,   5,  -6, -10],
-            [  5,   3,  -3,  -5],
-            [ -6,  -3,   4,   6],
-            [-10,  -5,   6,  10]
-        ]
+        cov_matrix (array like): covariance squared matrix.
     """
     dimension = len(matrix[0])
     cov_matrix = []
@@ -77,10 +59,10 @@ def covariance_matrix(matrix):
 def scipy_eig(sq_matrix):
     """Compute the eigenvalues and eigenvectors using scipy library.
     Args:
-        sq_matrix (list): square matrix.
+        sq_matrix (array like): square matrix.
     Return:
         eig_values (list): eigenvalues vector of length 1.
-        eig_vectors (list): eigenvectors matrix of length 1
+        eig_vectors (array like): eigenvectors matrix of length 1
     """
     outputs = eig(sq_matrix)
     eig_values = [eig_val.real for eig_val in outputs[0].tolist()]
@@ -110,26 +92,13 @@ def filter(eig_values, eig_vectors):
 def multiply(matrix, eig_vectors):
     """Derive the new dataset.
     Args:
-        matrix (list): matrix of data.
-        [
-            [   5,   1, -1, -0.5],
-            [   5, 1.5, -2, -0.5],
-            [-0.5,  -1,  2,    5],
-            [-0.5,  -2,  2,    5]
-        ]
-        eig_vectors (list): list of eigenvectors.
-        [
-            [ 0.6, 0.7, -0.3, 0.1],
-            [ 0.6, 0.7, -0.3, 0.1]
-        ]
+        matrix (array like): matrix of data. shape (n, p)
+        p is the initial dimension
+        n is the number of instances
+        eig_vectors (list): list of eigenvectors. shape (m, p)
     Return:
-        final_matrix (list): new matrix.
-        [
-            [x, x],
-            [x, x],
-            [x, x],
-            [x, x]
-        ]
+        final_matrix (array like): new matrix. shape (n, m)
+        m is the new dimension.
     """
     final_matrix = []
     for row in matrix:
